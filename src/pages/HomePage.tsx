@@ -8,6 +8,9 @@ import CallToAction from '../components/CallToAction';
 import Comparison from '../components/Comparison';
 import TestimonialMarquee from '../components/TestimonialMarquee';
 import VideoModal from '../components/VideoModal';
+import ProductGallery from '../components/ProductGallery';
+import SocialMedia from '../components/SocialMedia';
+import Research from '../components/Research';
 
 const ModelViewer = lazy(() => import('../components/ModelViewer'));
 
@@ -41,9 +44,15 @@ export default function HomePage() {
       <Divider />
       <ColorOptions />
       <Divider />
+      <ProductGallery />
+      <Divider />
       <Comparison />
       <Divider />
+      <Research />
+      <Divider />
       <TestimonialMarquee />
+      <Divider />
+      <SocialMedia />
       <Divider />
       <CallToAction />
       <VideoModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />

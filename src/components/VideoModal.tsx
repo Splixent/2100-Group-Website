@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface Props {
@@ -7,11 +7,8 @@ interface Props {
 }
 
 export default function VideoModal({ isOpen, onClose }: Props) {
-  const [videoError, setVideoError] = useState(false);
-
   useEffect(() => {
     if (!isOpen) return;
-    setVideoError(false);
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', handleKey);
     document.body.style.overflow = 'hidden';
@@ -22,14 +19,6 @@ export default function VideoModal({ isOpen, onClose }: Props) {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  // Try to resolve the video URL — file may not exist on deployed builds
-  let videoSrc: string;
-  try {
-    videoSrc = new URL('../assets/AdvertisementFinal.mp4', import.meta.url).href;
-  } catch {
-    videoSrc = '';
-  }
 
   return (
     <AnimatePresence>
@@ -72,57 +61,20 @@ export default function VideoModal({ isOpen, onClose }: Props) {
           </svg>
         </button>
 
-        {!videoError && videoSrc ? (
-          <video
-            src={videoSrc}
-            controls
-            autoPlay
-            onError={() => setVideoError(true)}
-            onClick={(e) => e.stopPropagation()}
-            style={{ width: '100%', maxWidth: 1100, maxHeight: '85vh', borderRadius: 12 }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          onClick={(e) => e.stopPropagation()}
+          style={{ width: '100%', maxWidth: 1100, aspectRatio: '16 / 9', borderRadius: 12, overflow: 'hidden' }}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/nCGX-P_WtKc?autoplay=1"
+            title="ZipIt Film"
+            style={{ width: '100%', height: '100%', border: 'none' }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           />
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              textAlign: 'center',
-              maxWidth: 420,
-              padding: '3rem',
-              background: 'var(--color-surface)',
-              borderRadius: 'var(--card-radius)',
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}
-          >
-            <div style={{
-              width: 64,
-              height: 64,
-              borderRadius: '50%',
-              background: 'rgba(252,202,3,0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.5rem',
-            }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--color-accent)">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <h3 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.25rem',
-              fontWeight: 700,
-              marginBottom: '0.5rem',
-            }}>Film coming soon</h3>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.9375rem',
-              color: 'var(--color-gray)',
-              lineHeight: 1.6,
-            }}>The full ZipIt advertisement is being finalized. Check back for the premiere.</p>
-          </motion.div>
-        )}
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
