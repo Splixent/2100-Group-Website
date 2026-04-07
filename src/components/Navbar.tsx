@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import logo from '../assets/zipit-logo.png';
 
 const links = [
   { path: '/', label: 'Home' },
@@ -52,13 +53,20 @@ export default function Navbar() {
       }}>
         {/* Logo */}
         <Link to="/" style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 700,
-          fontSize: '1.25rem',
-          color: 'var(--color-white)',
-          letterSpacing: '-0.02em',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
           textDecoration: 'none',
-        }}>ZipIt</Link>
+        }}>
+          <img src={logo} alt="ZipIt" style={{ height: 28, width: 28 }} />
+          <span style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            fontSize: '1.25rem',
+            color: 'var(--color-white)',
+            letterSpacing: '-0.02em',
+          }}>ZipIt</span>
+        </Link>
 
         {/* Desktop links */}
         <div style={{

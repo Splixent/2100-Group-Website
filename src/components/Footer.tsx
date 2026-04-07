@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/zipit-logo.png';
 
 const footerLinks = [
   { label: 'Forums', path: '/forums' },
@@ -24,7 +25,8 @@ export default function Footer() {
         flexWrap: 'wrap',
         gap: '1rem',
       }}>
-        <span style={{ fontSize: '0.75rem', color: 'var(--color-gray-dark)' }}>
+        <span style={{ fontSize: '0.75rem', color: 'var(--color-gray-dark)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <img src={logo} alt="ZipIt" style={{ height: 16, width: 16 }} />
           &copy; 2026 ZipIt. All rights reserved.
         </span>
         <div style={{ display: 'flex', gap: '2rem' }}>
