@@ -1,9 +1,5 @@
 import { useReveal } from '../hooks/useReveal';
 
-const youtubeVideos = [
-  { id: 'dQw4w9WgXcQ', title: 'ZipIt — Latest Video' },
-];
-
 const socials = [
   {
     name: 'YouTube',
